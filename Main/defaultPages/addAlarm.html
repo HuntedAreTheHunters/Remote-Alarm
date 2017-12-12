@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Wireless Alarm</title>
+	</head>
+	<body>
+		<center>
+			<h1>Add an alarm</h1>
+
+			<form action="addAlarm" method="post" enctype="multipart/form-data">
+				<div><u>Alarm Name: </u></div> <br/><input type="text" name="name" placeholder="Alarm Name" />
+				<div><u>Time: </u></div> <br/><input type="text" name="time" placeholder="Alarm Time" />
+				<div>
+					<u>Repeat: </u> <input type="radio" name="type" value="repeat" /> <br/>
+					<u>Silent: </u> <input type="radio" name="type" value="silent" /> <br/>
+					<u>Delete: </u> <input type="radio" name="type" value="delete" /> <br/>
+				</div>
+				Priority: 
+				<div>
+					<u>1: </u> <input type="radio" name="priority" value="1" /> <br/>
+					<u>2: </u> <input type="radio" name="priority" value="2" /> <br/>
+					<u>3: </u> <input type="radio" name="priority" value="3" /> <br/>
+				</div>
+				<button type="submit">Add alarm</button>
+			</form>
+
+		</center>
+	</body>
+</html>
