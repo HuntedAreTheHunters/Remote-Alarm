@@ -1,53 +1,93 @@
-#This file runs every second or so and checks if an alarm should go off and if it should it sets off the alarm.
+#useAlarm.py
+
+##//Imports
 import time
 import pygame
 import sys, json
 import sqlite3
+#from sense_hat import SenseHat
 
 pygame.mixer.init()
-alarm = pygame.mixer.Sound("alarm.wav")
+alarm = pygame.mixer.Sound("Resources/alarm.wav")
+#sense = SenseHat()
+color = (255, 0, 0)
+
 
 #Helper functions
 def returnConnAndCurr():
-	conn = sqlite3.connect("database.db")
-	c = conn.cursor()
-	return conn, c
+    """
+    This function returns the connection and the cursor to the SQL db.
+    """
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
+    return conn, c
 
 def CAC(conn, c):
-	conn.commit()
-	c.close()
-	conn.close()
+    """
+    This function takes the connection and cursor and commits changes and closes them.
+    """
+    conn.commit()
+    c.close()
+    conn.close()
 
 
 #Alarm functions
-def fire(silent=False):
-	#Set off the alarm 
-	alarm.play()
-	print("Playing the alarm")
+def fire(message):
+    #Set off the alarm
+    print("Playing the alarm now with the message: " + message)
+    alarm.play()
+    #sense.show_message(message, text_color=color)
 
+#Main function
 def main():
-        conn, c = returnConnAndCurr()
-        while True:
-		#Run forever until the nodeJS is killed, which will kill this
+    """
+    This main function runs the program forver, checking the time and setting off alarms
+    """
+    minute_fires = []
+    current_time = ""
+    conn, c = returnConnAndCurr()
+    while True:
+        current_minute = ""
+            
+        currentTime = time.strftime("%H:%M", time.gmtime())
+        currentTimeSeconds = time.strftime("%H:%M:%S", time.gmtime()) #Get both acceptable formats of the time.
+        currentDay = time.strftime("%A", time.gmtime())
+        
+        if not current_minute == current_time:
+            minute_fires = []
 
-		#Get all the rows from the database
-		#Get the time
-                currentTime = time.strftime("%H:%M", time.gmtime())
-                currentTimeSeconds = time.strftime("%H:%M:%S", time.gmtime())
-                for row in c.execute("SELECT * FROM alarms ORDER BY name"):
-                        #Check if it is the correct time to set it off
-                        if (row[1] in [currentTime, currentTimeSeconds]):
-                                #Set off the alarm
-                                if (row[3]) == 'silent':
-                                        fire(silent=True)
-                                else:
-                                        fire()
+        current_minute = currentTime
+            
+        for row in c.execute("SELECT * FROM alarms ORDER BY name"):
+            if (row[1] in [currentTime, currentTimeSeconds]):
+                #Check if the alarm has already been fired
+                if row[0] in minute_fires:
+                    continue
 
-                                #Check if it needs to be deleted
-                                if (row[3]) == 'delete':
-                                        c.execute("DELETE FROM alarms WHERE name='{0}'".format(row[0]))
+                
+                #Check if the current day is the day, and is so fire the alarm.
+                if row[2] == "TRUE" and currentDay == "Monday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                elif row[3] == "TRUE" and currentDay == "Tuesday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                elif row[4] == "TRUE" and currentDay == "Wednesday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                elif row[5] == "TRUE" and currentDay == "Thursday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                elif row[6] == "TRUE" and currentDay == "Friday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                elif row[7] == "TRUE" and currentDay == "Saturday":
+                    fire(row[0])
+                elif row[8] == "TRUE" and currentDay == "Sunday":
+                    fire(row[0])
+                    minute_fires.append(row[0])
+                    
                 time.sleep(0.9)
 
-if __name__ == '__main__':
-	main()
+main()
 

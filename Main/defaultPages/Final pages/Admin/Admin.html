@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<title>Wireless alarm</title>
+		<link rel="stylesheet" href="Admin.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="jquery.js"></script>
+	</head>
+
+	<body>
+		<div class="background">
+			<div>
+
+				<div class="sidebar">
+
+					<div class="sidebar_header">
+						<div class="bottom_line"></div>
+						<b>Access bar</b>
+					</div>
+
+					<div class="sidebar_bottom">
+						<a href="/" class="sidebutton_link selected">
+							<div class="sidebutton">
+									<b>Current Alarms</b></br>
+							</div>
+						</a>
+					</div>
+
+
+					<div class="sidebar_bottom">
+						<a href="/AddAlarms.html" class="sidebutton_link selected">
+							<div class="sidebutton">
+									<b>Add alarms</b>
+							</div>
+						</a>
+					</div>
+
+
+					<div class="sidebar_bottom">
+						<a href="/Admin.html" class="sidebutton_link selected">
+							<div class="sidebutton selected">
+									<b>Admin</b>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<!--Begin on the current alarms and end of the side bar -->
+
+			<div class="current_alarms">
+
+				<div class="current_alarms_header">
+					<h1><b>Admin</b></h1>
+				</div>
+
+
+				<div id="alarms">
+
+					<div class="alarm">
+						<div class="title">
+							Wake me up inside
+							<br/>
+							17:30
+						</div>
+						<div class="alarm_information">
+							<center>
+								<div class="delete">
+									<a href="/delete?id=2" class="confirm">Delete this alarm</a>
+								</div>
+							</center>
+
+						</div>
+					</div>
+
+					<div class="alarm_divider"></div>
+
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

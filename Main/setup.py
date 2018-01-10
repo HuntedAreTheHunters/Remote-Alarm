@@ -7,7 +7,7 @@ print("Beggining setup.")
 conn = sqlite3.connect("database.db")
 
 c = conn.cursor()
-c.execute("CREATE TABLE IF NOT EXISTS alarms(name TEXT, time TEXT, priority INTEGER, type TEXT);")
+c.execute("CREATE TABLE IF NOT EXISTS alarms(name TEXT, time TEXT, EveryMonday BOOLEAN, EveryTuesday BOOLEAN, EveryWednesday BOOLEAN, EveryThursday BOOLEAN, EveryFriday BOOLEAN, EverySaturday BOOLEAN, EverySunday BOOLEAN);")
 conn.commit()
 #Possible types are (repeat, delete, silent)
 #repeat - repeat the alarm every time specified
@@ -15,7 +15,7 @@ conn.commit()
 #silent - never actually set off
 
 #Add test alarm
-c.execute("INSERT INTO alarms VALUES('Important Alarm', '7:20', 2, 'Repeat')")
+c.execute("INSERT INTO alarms VALUES('Important Alarm', '17:20', 'FALSE', 'FALSE', 'FALSE', 'FALSE', 'FALSE', 'FALSE', 'FALSE')")
 conn.commit()
 c.close()
 

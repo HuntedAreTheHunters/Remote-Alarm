@@ -1,0 +1,150 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	position: relative;
+}
+
+html, body {
+	font-family: "Courier New";
+}
+
+.background {
+	background-color: #b4b6ba;
+	width: 100%;
+	height: 100%;
+	min-height: calc(200vh - 50px);
+	position: relative;
+	background: url('bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.sidebar {
+	height: 100%;
+	width: 20%;
+	min-height: calc(200vh - 50px);
+	background-color: #161719;
+	float: left;
+	z-index: 99 !important;
+}
+
+.selected {
+	background-color: #353638 !important;
+}
+
+.sidebar_header {
+	background-color: #101010;
+	width: 100%
+	height: 100em;
+	color: #07d6ed;
+	text-shadow: 2px;
+	text-align: center;
+	font-size: 20px;
+	border-bottom-style: outset;
+	border-bottom-color: #07d6ed;
+	border-bottom-width: 1px;
+}
+
+.bottom_line {
+	background-color: #07d6ed;
+	width: 100%;
+	height: 0.1%;
+	position: absolute;
+}
+.sidebar_bottom {
+	width: 100%;
+	height: 100%;
+	background-color: #212121;
+
+	margin-top: 1em;
+	border-bottom-style: outset;
+	border-bottom-color: #07d6ed;
+	border-bottom-width: 2px;
+}
+
+.sidebutton {
+	background-color: #5c5d60;
+	width: 100%;
+	height: 3em;
+	text-align: center;
+
+	height: 3em;
+  line-height: 3em;
+}
+.sidebutton_link {
+	color: white;
+	text-decoration: none;
+}
+
+.current_alarms_header {
+	color: white;
+	text-align: center;
+	background-color: #3a3a38;
+	border-bottom-style: outset;
+	border-bottom-color: #07d6ed;
+	border-bottom-width: 2px;
+}
+
+input[type=text], select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+		width: 60%;
+}
+
+button{
+    width: 60%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+input[type=radio] {
+
+}
+.form {
+	margin-top: 1em;
+	content-bottom: 2em;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.days {
+	color: #fff;
+	font-size: 2em;
+}
+input[type=radio] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: auto;
+
+  position: relative;
+  top: 4px;
+
+	padding-left: auto;
+}
+input:checked {
+  border: 6px solid black;
+}
