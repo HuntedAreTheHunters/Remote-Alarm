@@ -1,1 +1,30 @@
-TBD
+#H1 Wireless alarm clock!
+
+---
+#H3 Setup
+The setup for this is very simple. Connect your Sense Hat module to your Raspberry pi the download and install the repository.
+Then, make sure you have python installed, and run setup.py. This will create all the needed databases and format them correctly.
+When this is done, press enter and the system will be setup.
+To begin the alarm, after installing node JS, run main.js.
+
+After this your alarm is setup and you can now use it.
+---
+#H3 Usage
+
+To use your new wireless alarm you can go on a phone, a computer or tablet and open your browser of choice. The navigate
+to "192.168.0.23" (Note: If this does not work, you may have to go to 'http://192.168.0.23:80'). Once connected you should see the menus and the functional abilities.
+---
+#H5 Alarms
+The alarms panel allows you to see your current alarms, each alarm will have a bar. Click on the bar to open the drop down menu and see information about the alarm. This if formatted in the table.
+
+#H5 Add alarm
+This panel allows you to add a alarm and set it up. To begin, choose an alarm name, then choose an alarm times.
+The alarm time must be formatted as follows
+> HH:MM:SS
+> H = Hour, M = Minute, S = Second
+Or:
+> HH:MM
+> H = Hour, M = Minute
+
+#H5 Admin
+This panel allows you to delete alarms. To delete an alarm, click the alarm, click delete them click ok.
