@@ -43,51 +43,33 @@ def main():
     """
     This main function runs the program forver, checking the time and setting off alarms
     """
-    minute_fires = []
-    current_time = ""
     conn, c = returnConnAndCurr()
     while True:
-        current_minute = ""
-            
+
         currentTime = time.strftime("%H:%M", time.gmtime())
         currentTimeSeconds = time.strftime("%H:%M:%S", time.gmtime()) #Get both acceptable formats of the time.
         currentDay = time.strftime("%A", time.gmtime())
-        
-        if not current_minute == current_time:
-            minute_fires = []
 
-        current_minute = currentTime
-            
+
         for row in c.execute("SELECT * FROM alarms ORDER BY name"):
             if (row[1] in [currentTime, currentTimeSeconds]):
-                #Check if the alarm has already been fired
-                if row[0] in minute_fires:
-                    continue
 
-                
                 #Check if the current day is the day, and is so fire the alarm.
                 if row[2] == "TRUE" and currentDay == "Monday":
                     fire(row[0])
-                    minute_fires.append(row[0])
                 elif row[3] == "TRUE" and currentDay == "Tuesday":
                     fire(row[0])
-                    minute_fires.append(row[0])
                 elif row[4] == "TRUE" and currentDay == "Wednesday":
                     fire(row[0])
-                    minute_fires.append(row[0])
                 elif row[5] == "TRUE" and currentDay == "Thursday":
                     fire(row[0])
-                    minute_fires.append(row[0])
                 elif row[6] == "TRUE" and currentDay == "Friday":
                     fire(row[0])
-                    minute_fires.append(row[0])
                 elif row[7] == "TRUE" and currentDay == "Saturday":
                     fire(row[0])
                 elif row[8] == "TRUE" and currentDay == "Sunday":
                     fire(row[0])
-                    minute_fires.append(row[0])
-                    
-                time.sleep(0.9)
+
+                time.sleep(1)
 
 main()
-

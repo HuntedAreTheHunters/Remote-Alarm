@@ -332,7 +332,6 @@ function deleteAlarm(name, response, URS) {
 	Returns: None
 	Function: It takes the name of a alarm and deletes it then returns the deleted page
 	*/
-
 	const dbPath = path.resolve(__dirname, 'database.db')
 	var current_alarms = "";
 
@@ -381,6 +380,8 @@ function addAlarm(name, time, monday, tuesday, wednesday, thursday, friday, satu
 			var minutes = parseInt(times[1]);
 			if (times.length == 3) {
 				var seconds = parseInt(times[2]);
+			} else {
+				var seconds = "00";
 			}
 		} catch (fail){
 			error = true;
@@ -399,7 +400,7 @@ function addAlarm(name, time, monday, tuesday, wednesday, thursday, friday, satu
 		if (err) {console.log(err);}
 
 		//Insert alarm to db
-		db.run(`INSERT INTO alarms VALUES('${name}', '${time}', '${monday}', '${tuesday}', '${wednesday}', '${thursday}', '${friday}', '${saturday}', '${sunday}')`, function(err) {
+		db.run(`INSERT INTO alarms VALUES('${name}', '${hours + ":" + minutes + ":" + seconds}', '${monday}', '${tuesday}', '${wednesday}', '${thursday}', '${friday}', '${saturday}', '${sunday}')`, function(err) {
 			if (err) {console.log(err);}
 
 			db.close((err) => {
