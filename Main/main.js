@@ -16,162 +16,6 @@ const url = require('url');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-var start_home = `
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-
-		<title>Wireless alarm</title>
-		<link rel="stylesheet" href="homepage.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="jquery.js"></script>
-	</head>
-
-	<body>
-		<div class="background">
-			<div>
-
-				<div class="sidebar">
-
-					<div class="sidebar_header">
-						<div class="bottom_line"></div>
-						<b>Access bar</b>
-					</div>
-
-					<div class="sidebar_bottom">
-						<a href="/" class="sidebutton_link selected">
-							<div class="sidebutton selected">
-									<b>Current Alarms</b></br>
-							</div>
-						</a>
-					</div>
-
-
-					<div class="sidebar_bottom">
-						<a href="/AddAlarms.html" class="sidebutton_link selected">
-							<div class="sidebutton">
-									<b>Add alarms</b>
-							</div>
-						</a>
-					</div>
-
-
-					<div class="sidebar_bottom">
-						<a href="/Admin.html" class="sidebutton_link selected">
-							<div class="sidebutton">
-									<b>Admin</b>
-							</div>
-						</a>
-					</div>
-
-				</div>
-			</div>
-
-			<!--Begin on the current alarms and end of the side bar -->
-
-			<div class="current_alarms">
-
-				<div class="current_alarms_header">
-					<h1><b>Current alarms</b></h1>
-				</div>
-
-
-				<div id="alarms">
-
-`;
-
-var end_home = `
-
-				</div>
-
-			</div>
-		</div>
-	</body>
-</html>
-`;
-
-
-var start_admin = `
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-
-		<title>Wireless alarm</title>
-		<link rel="stylesheet" href="Admin.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="jquery.js"></script>
-	</head>
-
-	<body>
-		<div class="background">
-			<div>
-
-				<div class="sidebar">
-
-					<div class="sidebar_header">
-						<div class="bottom_line"></div>
-						<b>Access bar</b>
-					</div>
-
-					<div class="sidebar_bottom">
-						<a href="/" class="sidebutton_link selected">
-							<div class="sidebutton">
-									<b>Current Alarms</b></br>
-							</div>
-						</a>
-					</div>
-
-
-					<div class="sidebar_bottom">
-						<a href="/AddAlarms.html" class="sidebutton_link selected">
-							<div class="sidebutton">
-									<b>Add alarms</b>
-							</div>
-						</a>
-					</div>
-
-
-					<div class="sidebar_bottom">
-						<a href="/Admin.html" class="sidebutton_link selected">
-							<div class="sidebutton selected">
-									<b>Admin</b>
-							</div>
-						</a>
-					</div>
-
-				</div>
-			</div>
-
-			<!--Begin on the current alarms and end of the side bar -->
-
-			<div class="current_alarms">
-
-				<div class="current_alarms_header">
-					<h1><b>Admin</b></h1>
-				</div>
-
-
-				<div id="alarms">
-
-`;
-
-var end_admin = `
-
-				</div>
-
-			</div>
-		</div>
-	</body>
-</html>
-s
-`;
-
-
-
-
-
 //===================================================================\\
 //Helper Functions
 //===================================================================\\
@@ -260,13 +104,18 @@ function returnHomePage(response) {
 
 			db.close((err) => {
 				if (err) {console.log(err);}
+				fs.readFile(__dirname + "/Resources/start_home.html", function(error, data){
+					var start_home = data.toString("utf8");
+					fs.readFile(__dirname + "/Resources/end_home.html", function(error, data) {
+						var end_home = data.toString("utf8");
 
-				var home_page = start_home + current_alarms + end_home;
+						var home_page = start_home + current_alarms + end_home;
 
-				response.writeHead(200, {"Content-Type": "text/html", 'Cache-Control': 'no-cache'});
-				response.write(home_page, "utf8"); //Return the homepage
-				response.end();
-
+						response.writeHead(200, {"Content-Type": "text/html", 'Cache-Control': 'no-cache'});
+						response.write(home_page, "utf8"); //Return the homepage
+						response.end();
+					});
+				});
 			});
 		});
 	})
@@ -315,12 +164,18 @@ function returnAdminPage(response) {
 			db.close((err) => {
 				if (err) {console.log(err);}
 
-				var home_page = start_admin + current_alarms + end_admin;
+				fs.readFile(__dirname + "/Resources/start_admin.html", function (errror, data) {
+					var start_admin = data.toString("utf8");
+					fs.readFile(__dirname + "/Resources/end_admin.html", function (errror, data) {
+						var end_admin = data.toString("utf8");
+						
+						var home_page = start_admin + current_alarms + end_admin;
 
-				response.writeHead(200, {"Content-Type": "text/html", 'Cache-Control': 'no-cache'});
-				response.write(home_page, "utf8"); //Return the admin page
-				response.end();
-
+						response.writeHead(200, {"Content-Type": "text/html", 'Cache-Control': 'no-cache'});
+						response.write(home_page, "utf8"); //Return the admin page
+						response.end();
+					});
+				});
 			});
 		});
 	})
